@@ -1,11 +1,149 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome to our project</title>
-    <link rel="stylesheet" href="{% static 'main.css' %}">
+  <title>Job Portal</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
+<style>
+    body, h1, h2, h3, p, ul, li {
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: Arial, sans-serif;
+line-height: 1.4;
+}
+
+header {
+background-color: #333;
+color: #fff;
+padding: 20px;
+}
+
+h1 {
+font-size: 24px;
+margin: 0;
+}
+
+nav ul {
+list-style-type: none;
+}
+
+nav ul li {
+display: inline-block;
+margin-right: 10px;
+}
+
+nav ul li a {
+color: #fff;
+text-decoration: none;
+}
+
+section#hero {
+background-color: #f2f2f2;
+padding: 50px;
+text-align: center;
+}
+
+section#hero h2 {
+font-size: 32px;
+margin-bottom: 20px;
+}
+
+section#hero p {
+font-size: 18px;
+margin-bottom: 30px;
+}
+
+.btn {
+display: inline-block;
+background-color: #333;
+color: #fff;
+padding: 10px 20px;
+text-decoration: none;
+}
+
+section#featured-jobs {
+padding: 50px;
+}
+
+section#featured-jobs h2 {
+font-size: 24px;
+margin-bottom: 20px;
+}
+
+.job-card {
+background-color: #f2f2f2;
+padding: 20px;
+margin-bottom: 20px;
+}
+
+.job-card h3 {
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+.job-card p {
+margin-bottom: 5px;
+}
+
+footer {
+background-color: #333;
+color: #fff;
+padding: 20px;
+text-align: center;
+}
+
+footer p {
+font-size: 14px;
+}
+</style>
 <body>
+  <header>
+    <h1>Job Portal</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Companies</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <h2>Find Your Dream Job</h2>
+    <p>Explore thousands of job opportunities in various industries.</p>
+    <a href="#" class="btn">Get Started</a>
+  </section>
+
+  <section id="featured-jobs">
+    <h2>Featured Jobs</h2>
+    <div class="job-card">
+      <h3>Software Engineer</h3>
+      <p>Company A</p>
+      <p>Location: New York</p>
+      <a href="#" class="btn">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Marketing Specialist</h3>
+      <p>Company B</p>
+      <p>Location: San Francisco</p>
+      <a href="#" class="btn">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Graphic Designer</h3>
+      <p>Company C</p>
+      <p>Location: London</p>
+      <a href="#" class="btn">Apply Now</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Job Portal. All rights reserved.</p>
+  </footer>
 </body>
 </html>
