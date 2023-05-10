@@ -10,68 +10,80 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <style>
-  .header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-}
+      .header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
 
-.logo {
-  font-size: 24px;
-  margin-right: 20px;
-}
+    .logo {
+      font-size: 24px;
+      margin-right: 20px;
+    }
 
-.nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+    .nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-.nav li {
-  display: inline-block;
-  margin-right: 10px;
-}
+    .nav li {
+      display: inline-block;
+      margin-right: 10px;
+    }
 
-.nav a {
-  color: #fff;
-  text-decoration: none;
-}
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-}
-.content{
-  height: 80%;
-}
-.words{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
-    color: #333333;
-    font-weight: bold;
-}
-.background_class{
-    background-color:rgba(0,0,0,.3);
-    filter: blur(5px);
-    height:100%;
-    position:fixed;
-    width:100%;
-    top:0;
-    left:0;
-    background-image: url('/static/img/img.png');
-     background-size: cover;
-     background-position: center;
-    z-index: -1;
-}
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+    .content{
+      height: 80%;
+    }
+    .words{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+        color: #333333;
+        font-weight: bold;
+    }
+    .background_class{
+        background-color:rgba(0,0,0,.3);
+        filter: blur(5px);
+        height:100%;
+        position:fixed;
+        width:100%;
+        top:0;
+        left:0;
+        background-image: url('/static/img/img.png');
+         background-size: cover;
+         background-position: center;
+        z-index: -1;
+    }
+    .authenticated{
+        display: flex;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        margin-right: 20px;
+    }
+    .logout, .welcome{
+        margin-right: 10px;
+        align-items: end;
+    }
 </style>
 <body>
     <header class="header">
@@ -83,6 +95,16 @@
         <li><a href="#">Services</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
+
+      {% if user.is_authenticated %}
+        <div class="authenticated">
+            <a class="logout" href="/logout">Logout</a>
+            <p class="welcome">Welcome, {{user.username}}</p>
+        </div>
+
+      {% else %}
+        <a class="login" href="/login">Login</a>
+      {% endif %}
     </nav>
   </header>
     {% block content %}
