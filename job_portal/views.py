@@ -1,8 +1,10 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render
-from .forms import NewUserForm
+from django.shortcuts import render, redirect
+from .forms import NewUserForm, JobForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+
+from .models import Job
 
 
 def index(request):
@@ -47,5 +49,17 @@ def logout_request(request):
     return render(request, "base.html")
 
 
-def joblist_request(request):
-    return render(request, "job_portal/job_list.html")
+def create_job(request):
+    if request.method == 'POST':
+        form = JobForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "base.html")  # Redirect to the job list view after successful form submission
+    else:
+        form = JobForm()
+    return render(request, 'job_portal/job_add.html', {'form': form})
+
+
+def job_list(request):
+    jobs = Job.objects.all()
+    return render(request, 'job_portal/job_list.html', {'jobs': jobs})
