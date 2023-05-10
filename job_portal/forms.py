@@ -11,7 +11,6 @@ class JobForm(forms.ModelForm):
         fields = "__all__"
 
 
-
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
 

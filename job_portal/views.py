@@ -45,3 +45,7 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return render(request, "base.html")
+
+
+def joblist_request(request):
+    return render(request, "job_portal/job_list.html")
