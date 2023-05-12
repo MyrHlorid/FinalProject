@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <style>
-
       .header {
       background-color: #333;
       color: #fff;
@@ -52,10 +51,10 @@
         min-height: calc(100vh - 150px); /* Subtract header and footer heights */
     }
     .words{
-        position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        padding-bottom: 100px;
+        padding-top: 50px;
         font-size: 30px;
         color: #333333;
         font-weight: bold;
@@ -90,12 +89,12 @@
 </style>
 <body>
     <header class="header">
-    <h1 class="logo">Company Name</h1>
+    <h1 class="logo"><img src="{% static 'img/logo.png' %}"></h1>
     <nav class="nav">
       <ul>
-        <li><a href="#">Home</a></li>
+        <li><a href="base.html">Home</a></li>
         <li><a href="/job_list">Job list</a></li>
-        <li><a href="#">Services</a></li>
+        <li><a href="/job_add">Job_add</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
 
@@ -112,9 +111,26 @@
   </header>
         {% block content %}
              <div class="content">
-                    <div class="background_class"></div>
-                  <h1 class="words">Find your dream job</h1>
-             </div>
+                <div class="background_class"></div>
+                <h1 class="words text-center">Find your dream job</h1>
+                <div class="d-flex justify-content-center mt-5">
+                    <form class="form-inline">
+                        <div class="form-group mb-2 mr-2">
+                            <label for="search" class="sr-only">Search</label>
+                            <input type="text" class="form-control form-control-lg" id="search" placeholder="Search">
+                        </div>
+                        <div class="form-group mb-2 mr-2">
+                            <label for="type" class="sr-only">Job Type</label>
+                            <select class="form-control form-control-lg" id="type">
+                                <option>Full time</option>
+                                <option>Part time</option>
+                                <option>Internship</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg mb-2">Submit</button>
+                    </form>
+                </div>
+            </div>
         {% endblock %}
   <footer class="footer">
     <p>&copy; 2023 Job portal. All rights reserved.</p>
