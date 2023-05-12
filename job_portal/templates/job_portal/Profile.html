@@ -1,67 +1,68 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
   <div class="container my-5">
     <div class="row">
-      <div class="col-md-4">
-        <div class="card bg-secondary">
-          <img src="" class="card-img-top" alt="User Avatar">
-          <div class="card-body">
-            <h5 class="card-title">{{ user.username }}</h5>
-            <p class="card-text">{{ user.email }}</p>
-            <a href="#" class="btn btn-primary">Edit Profile</a>
-          </div>
+        <div class="col-md-4">
+            <div class="card bg-secondary">
+                <div class="d-flex justify-content-center mt-3">
+                    <img src="{% static 'img/prof.jpg' %}" style="height: 300px; width: 200px" class="card-img-top" alt="User Avatar">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text">{{ user.email }}</p>
+                    <a href="#" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+          <div class="card mt-3 bg-secondary">
+            <div class="card-body">
+                <h5 class="card-title">My Job Applications</h5>
+                <ul>
+                    {% for job in user.jobs.all %}
+                        <li>{{ job.title }}</li>
+                    {% endfor %}
+                </ul>
+                <a href="#" class="btn btn-danger">Clear List</a>
+            </div>
         </div>
-
-        <div class="card mt-3 bg-secondary">
-          <div class="card-body">
-            <h5 class="card-title">My Job Applications</h5>
-            <ul>
-              {% for job in user.jobs.all %}
-                <li>{{ job.title }}</li>
-              {% endfor %}
-            </ul>
-            <a href="#" class="btn btn-danger">Clear List</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-8">
-        <div class="card bg-secondary">
-          <div class="card-body">
-            <h5 class="card-title">About Me</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar. Pellentesque commodo mi vitae ultrices tempor. In luctus quam id libero volutpat, vel molestie lorem ultrices. Sed suscipit ante et odio aliquam, ut aliquam arcu consectetur.</p>
-          </div>
-        </div>
-
-        <div class="card mt-3 bg-secondary">
-          <div class="card-body">
-            <h5 class="card-title">My Skills</h5>
-            <ul>
-              <li>Web Development</li>
-              <li>Database Design</li>
-              <li>Python Programming</li>
-              <li>Project Management</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card mt-3 bg-secondary">
-          <div class="card-body">
-            <h5 class="card-title">My Experience</h5>
-            <ul>
-              <li>
-                <h6>Software Developer, XYZ Company</h6>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar.</p>
-              </li>
-              <li>
-                <h6>Database Administrator, ABC Company</h6>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar.</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <div class="col-md-8">
+        <div class="card bg-secondary">
+            <div class="card-body">
+                <h5 class="card-title">About Me</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar. Pellentesque commodo mi vitae ultrices tempor. In luctus quam id libero volutpat, vel molestie lorem ultrices. Sed suscipit ante et odio aliquam, ut aliquam arcu consectetur.</p>
+            </div>
+        </div>
+
+        <div class="card mt-3 bg-secondary">
+            <div class="card-body">
+                <h5 class="card-title">My Skills</h5>
+                <ul>
+                    <li>Web Development</li>
+                    <li>Database Design</li>
+                    <li>Python Programming</li>
+                    <li>Project Management</li>
+                </ul>
+            </div>
+        </div>
+
+          <div class="card mt-3 bg-secondary">
+              <div class="card-body">
+                  <h5 class="card-title">My Experience</h5>
+                  <ul>
+                      <li>
+                          <h6>Software Developer, XYZ Company</h6>
+                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar.</p>
+                      </li>
+                      <li>
+                          <h6>Database Administrator, ABC Company</h6>
+                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar.</p>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
   </div>
 {% endblock %}

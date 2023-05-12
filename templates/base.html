@@ -13,7 +13,7 @@
       .header {
       background-color: #333;
       color: #fff;
-      padding: 20px;
+      padding: 10px;
       display: flex;
       align-items: center;
     }
@@ -70,7 +70,6 @@
         left:0;
         background-image: url('/static/img/back.jpg');
          background-size: cover;
-         background-position: center;
         z-index: -1;
     }
       {% endblock %}
@@ -90,13 +89,13 @@
 </style>
 <body>
     <header class="header">
-    <h1 class="logo"><img src="{% static 'img/logo.png' %}"></h1>
+    <h1 class="logo"><img src="{% static 'img/logo.jpg' %}" style="width: 80px"></h1>
     <nav class="nav">
       <ul>
-        <li><a href="base.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/job_list">Job list</a></li>
         <li><a href="/job_add">Job_add</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/profile">Profile</a></li>
       </ul>
 
       {% if user.is_authenticated %}
