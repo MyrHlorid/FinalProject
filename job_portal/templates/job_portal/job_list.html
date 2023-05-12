@@ -3,25 +3,9 @@
 
 {% block content %}
     <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 mb-4">
-                <div class="card rounded-lg">
-                    <div class="card-header bg-dark text-white rounded-top">
-                        <h5 class="mb-0">Job 1</h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <p class="card-text"><strong>Position:</strong> Web Developer</p>
-                        <p class="card-text"><strong>Job type:</strong> Full time</p>
-                        <p class="card-text"><strong>Location:</strong> New York, NY</p>
-                        <p class="card-text"><strong>Salary:</strong> $100,000 - $120,000</p>
-                        <p class="card-text"><strong>Experience:</strong> 3-5 years</p>
-                        <p class="card-text"><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla non risus posuere consectetur. Suspendisse potenti. Integer eget dui vitae tortor varius gravida eu sit amet dolor.</p>
-                        <a href="#" class="btn btn-dark">Apply now</a>
-                    </div>
-                </div>
-            </div>
+        <div class="row">
             {% for job in jobs %}
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-4 mb-4">
                 <div class="card rounded-lg">
                     <div class="card-header bg-dark text-white rounded-top">
                         <h5 class="mb-0">{{ job.job_name }}</h5>
