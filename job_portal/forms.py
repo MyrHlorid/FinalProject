@@ -1,10 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from .models import Profile
 from job_portal.models import Job
 
-
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('photo', 'name', 'about_me', 'my_skills', 'my_experience')
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job

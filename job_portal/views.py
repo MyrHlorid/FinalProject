@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm, JobForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-
+from .forms import ProfileForm
+from .models import Profile
 from .models import Job
 
 
@@ -64,5 +65,29 @@ def job_list(request):
     jobs = Job.objects.all()
     return render(request, 'job_portal/job_list.html', {'jobs': jobs})
 
-def profile(request):
-    return render(request=request, template_name="job_portal/Profile.html")
+def profile_view(request):
+    profile = Profile.objects.get(user=request.user)
+    return render(request, 'job_portal/profile.html', {'profile': profile})
+
+def profile_create(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile_view')
+    else:
+        form = ProfileForm()
+    return render(request, 'job_portal/profile_create.html', {'form': form})
+
+def profile_update(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_view')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'job_portal/profile_update.html', {'form': form})
