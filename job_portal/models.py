@@ -4,20 +4,26 @@ from django.utils import timezone
 
 # Create your models here.
 
-JOB_TYPE = (
-    ('1', "Full time"),
-    ('2', "Part time"),
-    ('3', "Internship"),
-)
+
+
+from django.db import models
 
 class Job(models.Model):
-    job_name = models.CharField(max_length=200, null=True),
-    position = models.CharField(max_length=100, null=True),
+    job_name = models.CharField(max_length=200, default='')
+    position = models.CharField(max_length=100, default='')
+    JOB_TYPE = (
+        ('1', "Full time"),
+        ('2', "Part time"),
+        ('3', "Internship"),
+    )
     job_type = models.CharField(choices=JOB_TYPE, max_length=1)
-    location = models.CharField(max_length=100, null=False),
-    salary = models.IntegerField(null=True),
-    experience = models.IntegerField(null=True),
-    description = models.CharField(max_length=255, null=True)
+    location = models.CharField(max_length=100, default='')
+    salary = models.IntegerField(null=True)
+    experience = models.IntegerField(null=True)
+    description = models.CharField(max_length=255, default='')
+
+    def __str__(self):
+        return self.job_name
 
 
 class Candidates (models.Model):

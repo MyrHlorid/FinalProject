@@ -1,0 +1,7 @@
+.content {
+    min-height: calc(100vh - 150px); /* Subtract header and footer heights */
+}
+.content-wrapper {
+    position: relative;
+    padding-bottom: 15px; /* Add footer height */
+}
