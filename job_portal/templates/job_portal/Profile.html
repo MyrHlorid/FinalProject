@@ -42,8 +42,8 @@
                 <div class="card-body">
                     <h5 class="card-title">My Skills</h5>
                     <ul>
-                        {% for skill in user.profile.skills.all %}
-                            <li>{{ skill.name }}</li>
+                        {% for skill in user.profile.my_skills.split(",") %}
+                            <li>{{ skill }}</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -53,10 +53,10 @@
                 <div class="card-body">
                     <h5 class="card-title">My Experience</h5>
                     <ul>
-                        {% for experience in user.profile.experiences.all %}
+                        {% for experience in user.profile.my_experience.split("\n") %}
                             <li>
-                                <h6>{{ experience.job_title }}, {{ experience.company_name }}</h6>
-                                <p class="card-text">{{ experience.description }}</p>
+                                <h6>{{ experience.split("|")[0] }}, {{ experience.split("|")[1] }}</h6>
+                                <p class="card-text">{{ experience.split("|")[2] }}</p>
                             </li>
                         {% endfor %}
                     </ul>
