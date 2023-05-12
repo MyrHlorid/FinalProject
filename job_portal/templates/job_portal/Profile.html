@@ -12,15 +12,29 @@
             <a href="#" class="btn btn-primary">Edit Profile</a>
           </div>
         </div>
+
+        <div class="card mt-3 bg-light">
+          <div class="card-body">
+            <h5 class="card-title">My Job Applications</h5>
+            <ul>
+              {% for job in user.jobs.all %}
+                <li>{{ job.title }}</li>
+              {% endfor %}
+            </ul>
+            <a href="#" class="btn btn-danger">Clear List</a>
+          </div>
+        </div>
       </div>
-      <div class="col-md-8">
+
+      <div class="col-md-8 bg-light">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">About Me</h5>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod turpis sit amet justo interdum, nec eleifend purus pulvinar. Pellentesque commodo mi vitae ultrices tempor. In luctus quam id libero volutpat, vel molestie lorem ultrices. Sed suscipit ante et odio aliquam, ut aliquam arcu consectetur.</p>
           </div>
         </div>
-        <div class="card mt-3">
+
+        <div class="card mt-3 bg-light">
           <div class="card-body">
             <h5 class="card-title">My Skills</h5>
             <ul>
@@ -31,6 +45,7 @@
             </ul>
           </div>
         </div>
+
         <div class="card mt-3">
           <div class="card-body">
             <h5 class="card-title">My Experience</h5>
