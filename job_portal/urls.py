@@ -17,6 +17,6 @@ urlpatterns = [
     path('profile/int:pk/', views.profile_view, name='profile_view'),
     path('profile/create/', views.profile_create, name='profile_create'),
     path('profile_update/', views.profile_update, name='profile_update'),
-    path('add_job_to_user/int:job_id/', views.add_job_to_user, name='add_job_to_user'),
+    path('add_job_to_user/<int:job_id>/', views.add_job_to_user, name='add_job_to_user'),
     path('profile/int:pk/update/', views.profile_update, name='profile_update_view'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
