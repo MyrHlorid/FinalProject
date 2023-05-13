@@ -7,6 +7,8 @@ from .forms import ProfileForm
 from .models import Profile
 from .models import Job
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
 from django.contrib.auth.models import User
 
 
@@ -99,3 +101,4 @@ def profile_update(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'job_portal/profile_update.html', {'form': form})
+
