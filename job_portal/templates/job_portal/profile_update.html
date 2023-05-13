@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="width: 500px; margin: 0 auto;">
+  <h2 style="text-align: center;">Edit Profile</h2>
+  <form style="margin-top: 20px;">
+    <div style="margin-bottom: 10px;">
+      <label for="name" style="display: block;">Name</label>
+      <input type="text" id="name" style="width: 100%; padding: 5px;">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="email" style="display: block;">Email</label>
+      <input type="email" id="email" style="width: 100%; padding: 5px;">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="bio" style="display: block;">About Me</label>
+      <textarea id="bio" style="width: 100%; padding: 5px;"></textarea>
+    </div>
+        <div style="margin-bottom: 10px;">
+      <label for="bio" style="display: block;">My Skills</label>
+      <textarea id="skills" style="width: 100%; padding: 5px;"></textarea>
+    </div>
+        <div style="margin-bottom: 10px;">
+      <label for="bio" style="display: block;">My Experience</label>
+      <textarea id="experience" style="width: 100%; padding: 5px;"></textarea>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="avatar" style="display: block;">Profile Picture</label>
+      <input type="file" id="avatar" style="padding: 5px;">
+    </div>
+    <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; cursor: pointer; display: block; margin: 0 auto;">Save Changes</button>
+  </form>
+</div>
+{% endblock content %}
