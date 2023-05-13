@@ -25,7 +25,7 @@ class UserJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
-class Candidates(models.Model):
+class Candidates (models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     resume = models.FileField(null=True)
