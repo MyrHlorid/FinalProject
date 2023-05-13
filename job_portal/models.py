@@ -4,10 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
-
-from django.db import models
-
 class Job(models.Model):
     job_name = models.CharField(max_length=200, default='')
     position = models.CharField(max_length=100, default='')
@@ -25,8 +21,11 @@ class Job(models.Model):
     def __str__(self):
         return self.job_name
 
+class UserJob(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
-class Candidates (models.Model):
+class Candidates(models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     resume = models.FileField(null=True)

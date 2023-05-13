@@ -8,6 +8,13 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('photo', 'name', 'about_me', 'my_skills', 'my_experience')
+
+class ApplyJobForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=20)
+    cv = forms.FileField()
+    cover_letter = forms.CharField(widget=forms.Textarea)
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job

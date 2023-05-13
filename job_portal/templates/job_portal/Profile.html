@@ -20,14 +20,33 @@
                 </div>
             </div>
             <div class="card mt-3 bg-secondary">
-                <div class="card-body">
-                    <h5 class="card-title">My Job Applications</h5>
-                    <ul>
-                        {% for job in user.jobs.all %}
-                            <li>{{ job.title }}</li>
-                        {% endfor %}
+              <<div class="card-body">
+                  <h5 class="card-title">My Job Applications</h5>
+                  {% if job_applies %}
+                    <ul class="list-group">
+                      {% for job_apply in job_applies %}
+                        <li class="list-group-item">{{ job_apply.job.job_name }}</li>
+                      {% endfor %}
                     </ul>
-                    <a href="#" class="btn btn-danger">Clear List</a>
+                    <a href="{% url 'clear_user_jobs' %}" class="btn btn-danger">Clear List</a>
+                  {% else %}
+                    <p>No job applications yet.</p>
+                  {% endif %}
+                  {% if user.is_authenticated %}
+                    {% with user_jobs=user.userjob_set.all %}
+                      {% if user_jobs %}
+                        <h6>Applied Jobs:</h6>
+                        <ul class="list-group">
+                          {% for job_apply in user_jobs %}
+                            <li class="list-group-item">{{ job_apply.job.job_name }}</li>
+                          {% endfor %}
+                        </ul>
+                        <a href="{% url 'clear_user_jobs' %}" class="btn btn-danger">Clear List</a>
+                      {% else %}
+                        <p>You have not applied to any jobs yet.</p>
+                      {% endif %}
+                    {% endwith %}
+                  {% endif %}
                 </div>
             </div>
         </div>

@@ -17,7 +17,9 @@
                         <p class="card-text"><strong>Salary:</strong>{{job.salary}}</p>
                         <p class="card-text"><strong>Experience:</strong>{{job.experience}}</p>
                         <p class="card-text"><strong>Description:</strong>{{job.description}}</p>
-                        <a href="#" class="btn btn-dark">Apply now</a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add_job_to_user' job_id=job.id %}" class="btn btn-dark">Apply now</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
