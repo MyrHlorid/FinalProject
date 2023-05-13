@@ -4,30 +4,31 @@
 {% block content %}
 <div style="width: 500px; margin: 0 auto;">
   <h2 style="text-align: center;">Edit Profile</h2>
-  <form style="margin-top: 20px;">
+  <form style="margin-top: 20px;" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     <div style="margin-bottom: 10px;">
       <label for="name" style="display: block;">Name</label>
-      <input type="text" id="name" style="width: 100%; padding: 5px;">
+      <input type="text" id="name" name="name" value="{{ form.name.value }}" style="width: 100%; padding: 5px;">
     </div>
     <div style="margin-bottom: 10px;">
       <label for="email" style="display: block;">Email</label>
-      <input type="email" id="email" style="width: 100%; padding: 5px;">
+      <input type="email" id="email" name="email" value="{{ form.email.value }}" style="width: 100%; padding: 5px;">
     </div>
     <div style="margin-bottom: 10px;">
       <label for="bio" style="display: block;">About Me</label>
-      <textarea id="bio" style="width: 100%; padding: 5px;"></textarea>
+      <textarea id="bio" name="bio" style="width: 100%; padding: 5px;">{{ form.bio.value }}</textarea>
     </div>
-        <div style="margin-bottom: 10px;">
-      <label for="bio" style="display: block;">My Skills</label>
-      <textarea id="skills" style="width: 100%; padding: 5px;"></textarea>
+    <div style="margin-bottom: 10px;">
+      <label for="skills" style="display: block;">My Skills</label>
+      <textarea id="skills" name="skills" style="width: 100%; padding: 5px;">{{ form.skills.value }}</textarea>
     </div>
-        <div style="margin-bottom: 10px;">
-      <label for="bio" style="display: block;">My Experience</label>
-      <textarea id="experience" style="width: 100%; padding: 5px;"></textarea>
+    <div style="margin-bottom: 10px;">
+      <label for="experience" style="display: block;">My Experience</label>
+      <textarea id="experience" name="experience" style="width: 100%; padding: 5px;">{{ form.experience.value }}</textarea>
     </div>
     <div style="margin-bottom: 10px;">
       <label for="avatar" style="display: block;">Profile Picture</label>
-      <input type="file" id="avatar" style="padding: 5px;">
+      <input type="file" id="avatar" name="avatar" style="padding: 5px;">
     </div>
     <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; cursor: pointer; display: block; margin: 0 auto;">Save Changes</button>
   </form>
