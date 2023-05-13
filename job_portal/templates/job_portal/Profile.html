@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated and profile %}
   <div class="container my-5">
     <div class="row">
         <div class="col-md-4">
             <div class="card bg-secondary">
                 <div class="d-flex justify-content-center mt-3">
-                    {% if user.profile.photo %}
-                        <img src="{{ user.profile.photo.url }}" style="height: 300px; width: 200px" class="card-img-top" alt="User Avatar">
+                    {% if profile.photo %}
+                        <img src="{{ profile.photo.url }}" style="height: 300px; width: 200px" class="card-img-top" alt="User Avatar">
                     {% else %}
                         <img src="{% static 'img/prof.jpg' %}" style="height: 300px; width: 200px" class="card-img-top" alt="User Avatar">
                     {% endif %}
                 </div>
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{ user.username }}</h5>
+                    <h5 class="card-title">{{ user.profile.name }}</h5>
                     <p class="card-text">{{ user.email }}</p>
                     <a href="#" class="btn btn-primary">Edit Profile</a>
                 </div>
@@ -42,9 +43,7 @@
                 <div class="card-body">
                     <h5 class="card-title">My Skills</h5>
                     <ul>
-                        {% for skill in user.profile.my_skills.split(",") %}
-                            <li>{{ skill }}</li>
-                        {% endfor %}
+                        {{ user.profile.my_skills }}
                     </ul>
                 </div>
             </div>
@@ -53,16 +52,14 @@
                 <div class="card-body">
                     <h5 class="card-title">My Experience</h5>
                     <ul>
-                        {% for experience in user.profile.my_experience.split("\n") %}
-                            <li>
-                                <h6>{{ experience.split("|")[0] }}, {{ experience.split("|")[1] }}</h6>
-                                <p class="card-text">{{ experience.split("|")[2] }}</p>
-                            </li>
-                        {% endfor %}
+                        {{ user.profile.my_experience }}
                     </ul>
                 </div>
             </div>
         </div>
     </div>
   </div>
+{% else %}
+    <p>Please set up your profile to view this page.</p>
+{% endif %}
 {% endblock %}

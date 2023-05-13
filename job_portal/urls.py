@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .views import profile_view, profile_create, profile_update
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.index),
@@ -13,4 +15,4 @@ urlpatterns = [
     path('profile/<int:pk>/', profile_view, name='profile_view'),
     path('profile/create/', profile_create, name='profile_create'),
     path('profile/<int:pk>/update/', profile_update, name='profile_update')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

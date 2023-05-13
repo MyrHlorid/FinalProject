@@ -6,6 +6,8 @@ from django.contrib import messages
 from .forms import ProfileForm
 from .models import Profile
 from .models import Job
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -65,8 +67,14 @@ def job_list(request):
     jobs = Job.objects.all()
     return render(request, 'job_portal/job_list.html', {'jobs': jobs})
 
+@login_required(login_url='login')
 def profile_view(request):
-    profile = Profile.objects.get(user=request.user)
+    user = request.user
+    try:
+        profile = Profile.objects.get(user=user)
+    except Profile.DoesNotExist:
+        profile = Profile(user=user)
+        profile.save()
     return render(request, 'job_portal/profile.html', {'profile': profile})
 
 def profile_create(request):
