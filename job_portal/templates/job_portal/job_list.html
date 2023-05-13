@@ -2,12 +2,32 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .background_class{
+        background-color:rgba(0,0,0,.3);
+        filter: blur(5px);
+        height:100%;
+        position:fixed;
+        width:100%;
+        top:0;
+        left:0;
+        background-image: url('/static/img/jobs.jpg');
+         background-size: cover;
+        z-index: -1;
+    }
+    .navycolor {
+    background-color: #5F9EA0;
+    color: white;
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+</style>
+<div class="background_class"></div>
     <div class="container my-5">
         <div class="row">
             {% for job in jobs %}
             <div class="col-lg-4 mb-4">
                 <div class="card rounded-lg">
-                    <div class="card-header bg-dark text-white rounded-top">
+                    <div class="card-header navycolor">
                         <h5 class="mb-0">{{ job.job_name }}</h5>
                     </div>
                     <div class="card-body p-4">
