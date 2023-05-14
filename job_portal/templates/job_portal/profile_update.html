@@ -1,36 +1,66 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'job_portal/base.html' %}
 
 {% block content %}
-<div style="width: 500px; margin: 0 auto;">
-  <h2 style="text-align: center;">Edit Profile</h2>
-  <form style="margin-top: 20px;" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div style="margin-bottom: 10px;">
-      <label for="name" style="display: block;">Name</label>
-      <input type="text" id="name" name="name" value="{{ form.name.value }}" style="width: 100%; padding: 5px;">
+<style>
+.background_class{
+        background-color:rgba(0,0,0,.3);
+        filter: blur(5px);
+        height:100%;
+        position:fixed;
+        width:100%;
+        top:0;
+        left:0;
+        background-image: url('/static/img/background.jpg');
+        background-size: cover;
+        z-index: -1;
+    }
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+.form-group {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+</style>
+<div class="background_class"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">{{ form.instance.user.username }}'s Profile</div>
+          <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="{{ form.photo.id_for_label }}">Profile Photo:</label>
+                <div class="custom-file">
+                  {{ form.photo }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Name:</label>
+                {{ form.name }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.about_me.id_for_label }}">About Me:</label>
+                {{ form.about_me }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.my_skills.id_for_label }}">My Skills:</label>
+                {{ form.my_skills }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.my_experience.id_for_label }}">My Experience:</label>
+                {{ form.my_experience }}
+              </div>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="margin-bottom: 10px;">
-      <label for="email" style="display: block;">Email</label>
-      <input type="email" id="email" name="email" value="{{ form.email.value }}" style="width: 100%; padding: 5px;">
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="bio" style="display: block;">About Me</label>
-      <textarea id="bio" name="bio" style="width: 100%; padding: 5px;">{{ form.bio.value }}</textarea>
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="skills" style="display: block;">My Skills</label>
-      <textarea id="skills" name="skills" style="width: 100%; padding: 5px;">{{ form.skills.value }}</textarea>
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="experience" style="display: block;">My Experience</label>
-      <textarea id="experience" name="experience" style="width: 100%; padding: 5px;">{{ form.experience.value }}</textarea>
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="avatar" style="display: block;">Profile Picture</label>
-      <input type="file" id="avatar" name="avatar" style="padding: 5px;">
-    </div>
-    <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; cursor: pointer; display: block; margin: 0 auto;">Save Changes</button>
-  </form>
-</div>
-{% endblock content %}
+  </div>
+{% endblock %}

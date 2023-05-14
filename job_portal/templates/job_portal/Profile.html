@@ -2,75 +2,110 @@
 {% load static %}
 {% block content %}
 {% if user.is_authenticated and profile %}
+<style>
+    /* Заголовки */
+    h5{
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        color: #FAEBD7;
+    }
+    ul.list-group {
+        max-height: 145px;
+        overflow-y: auto;
+      }
+    /* Обычный текст */
+    p{
+        font-family: Verdana, sans-serif;
+        color: #FFFFFF;
+    }
+    .kon{
+        color: #FFFFFF;
+    }
+    .background_class{
+        background-color:rgba(0,0,0,.3);
+        filter: blur(5px);
+        height:100%;
+        position:fixed;
+        width:100%;
+        top:0;
+        left:0;
+        background-image: url('/static/img/background.jpg');
+         background-size: cover;
+        z-index: -1;
+    }
+</style>
+<div class="background_class"></div>
   <div class="container my-5">
     <div class="row">
         <div class="col-md-4">
             <div class="card bg-secondary">
                 <div class="d-flex justify-content-center mt-3">
                     {% if profile.photo %}
-                        <img src="{{ profile.photo.url }}" style="height: 300px; width: 200px" class="card-img-top" alt="User Avatar">
+                        <img src="{{ profile.photo.url }}" style="height: 300px; width: 250px" class="card-img-top" alt="User Avatar">
                     {% else %}
-                        <img src="{% static 'img/prof.jpg' %}" style="height: 300px; width: 200px" class="card-img-top" alt="User Avatar">
+                        <img src="{% static 'img/prof.jpg' %}" style="height: 300px; width: 250px" class="card-img-top" alt="User Avatar">
                     {% endif %}
                 </div>
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{ user.profile.name }}</h5>
-                    <p class="card-text">{{ user.email }}</p>
+                    <h5 class="card-title mb-3" style="font-size: 30px">{{ user.profile.name }}</h5>
+                    <p class="card-text mb-3">{{ user.email }}</p>
                     <a href="/profile_update" class="btn btn-primary">Edit Profile</a>
                 </div>
             </div>
-            <div class="card mt-3 bg-secondary">
-              <<div class="card-body">
-                  <h5 class="card-title">My Job Applications</h5>
-                  {% if job_applies %}
-                    <ul class="list-group">
-                      {% for job_apply in job_applies %}
-                        <li class="list-group-item">{{ job_apply.job.job_name }}</li>
-                      {% endfor %}
-                    </ul>
-                    <a href="{% url 'clear_user_jobs' %}" class="btn btn-danger">Clear List</a>
-                  {% else %}
-                    <p>No job applications yet.</p>
-                  {% endif %}
-                  {% if user.is_authenticated %}
-                    {% with user_jobs=user.userjob_set.all %}
-                      {% if user_jobs %}
-                        <h6>Applied Jobs:</h6>
-                        <ul class="list-group">
-                          {% for job_apply in user_jobs %}
-                            <li class="list-group-item">{{ job_apply.job.job_name }}</li>
-                          {% endfor %}
-                        </ul>
-                        <a href="{% url 'clear_user_jobs' %}" class="btn btn-danger">Clear List</a>
-                      {% else %}
-                        <p>You have not applied to any jobs yet.</p>
-                      {% endif %}
-                    {% endwith %}
-                  {% endif %}
+            <div class="card mt-3 bg-secondary p-3 rounded">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">My Job Applications</h5>
+                    <div class="job-applications">
+                        {% if job_applies %}
+                            <ul class="list-group mb-3">
+                                {% for job_apply in job_applies %}
+                                    <li class="list-group-item">{{ job_apply.job.job_name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'clear_user_jobs' %}" class="btn btn-danger">Clear List</a>
+                        {% else %}
+                            <p>No job applications yet.</p>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            {% with user_jobs=user.userjob_set.all %}
+                                {% if user_jobs %}
+                                    <h6 class="mt-3">Applied Jobs:</h6>
+                                    <ul class="list-group mb-3">
+                                        {% for job_apply in user_jobs %}
+                                            <li class="list-group-item">{{ job_apply.job.job_name }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    <a href="{% url 'clear_user_jobs' %}" class="btn btn-danger">Clear List</a>
+                                {% else %}
+                                    <p>You have not applied to any jobs yet.</p>
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
-            <div class="card bg-secondary">
+            <div class="card bg-secondary p-3 rounded">
                 <div class="card-body">
-                    <h5 class="card-title">About Me</h5>
+                    <h5 class="card-title mb-3">About Me</h5>
                     <p class="card-text">{{ user.profile.about_me }}</p>
                 </div>
             </div>
 
-            <div class="card mt-3 bg-secondary">
+            <div class="card mt-3 bg-secondary p-3 rounded">
                 <div class="card-body">
-                    <h5 class="card-title">My Skills</h5>
-                    <ul>
+                    <h5 class="card-title mb-3">My Skills</h5>
+                    <ul class="kon">
                         {{ user.profile.my_skills }}
                     </ul>
                 </div>
             </div>
 
-            <div class="card mt-3 bg-secondary">
+            <div class="card mt-3 bg-secondary p-3 rounded">
                 <div class="card-body">
-                    <h5 class="card-title">My Experience</h5>
-                    <ul>
+                    <h5 class="card-title mb-3">My Experience</h5>
+                    <ul class="kon">
                         {{ user.profile.my_experience }}
                     </ul>
                 </div>
