@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, JobForm
+from .forms import NewUserForm, JobForm, SearchJobForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import ProfileForm
@@ -17,6 +17,35 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, "base.html")
+
+from django.shortcuts import render
+from .models import Job
+
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Job
+
+def search_job(request):
+    search_text = request.GET.get("search", "")
+    category = request.GET.get("category")
+
+    jobs = Job.objects.all()
+
+    if search_text and category:
+        jobs = jobs.filter(
+            Q(job_name__icontains=search_text) & Q(job_type=category)
+        )
+    elif search_text:
+        jobs = jobs.filter(job_name__icontains=search_text)
+   
+
+    context = {
+        "jobs": jobs,
+    }
+
+    return render(request, "job_portal/search_results.html", context)
+
+
 
 
 def job_search(request):
@@ -69,6 +98,8 @@ def add_job_to_user(request, job_id):
     user_job = UserJob(user=user, job=job)
     user_job.save()
     return redirect('job_list')
+
+
 def job_name(request, job_id, user_id):
     user_job = get_object_or_404(UserJob, job_id=job_id, user_id=user_id)
     job_name = user_job.job.job_name
@@ -155,4 +186,3 @@ def profile_update(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'job_portal/profile_update.html', {'form': form})
-

@@ -9,6 +9,30 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('photo', 'name', 'about_me', 'my_skills', 'my_experience')
 
+class SearchJobForm(forms.Form):
+    search = forms.CharField(required=False, min_length=3)
+    category = forms.ChoiceField(required=False,
+                                 choices=(
+                                     ("category1", "Category 1"),
+                                     ("category2", "Category 2"),
+                                     ("category3", "Category 3"),
+                                 ))
+
+
+
+
+class ApplyJobForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=20)
+    cv = forms.FileField()
+    cover_letter = forms.CharField(widget=forms.Textarea)
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('photo', 'name', 'about_me', 'my_skills', 'my_experience')
+
 class ApplyJobForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="list-group">
+                    {% if jobs %}
+                        {% for job in jobs %}
+                            <div class="list-group-item mb-3">
+                                <h5 class="mb-1">{{ job.job_name }}</h5>
+                                <p class="mb-1"><strong>Position:</strong> {{ job.position }}</p>
+                                <p class="mb-1"><strong>Job Type:</strong> {{ job.get_job_type_display }}</p>
+                                <p class="mb-1"><strong>Location:</strong> {{ job.location }}</p>
+                                <p class="mb-1"><strong>Salary:</strong> {{ job.salary }}</p>
+                                <p class="mb-1"><strong>Experience:</strong> {{ job.experience }}</p>
+                                <p class="mb-1"><strong>Description:</strong> {{ job.description }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No jobs found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
