@@ -1,54 +1,93 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container">
-  <form class="form-inline">
-    <div class="form-group mb-2 mr-2">
-      <label for="search" class="sr-only">Search</label>
-      <input type="text" class="form-control form-control-lg" id="search" name="search" placeholder="Search">
-    </div>
-    <div class="form-group mb-2 mr-2">
-      <label for="type" class="sr-only">Job Type</label>
-      <select class="form-control form-control-lg" id="type" name="type">
-        <option value="">All</option>
-        <option value="1">Full time</option>
-        <option value="2">Part time</option>
-        <option value="3">Internship</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg mb-2">Search</button>
-  </form>
 
-  <h1>Job Search Results</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Job Name</th>
-        <th scope="col">Position</th>
-        <th scope="col">Job Type</th>
-        <th scope="col">Location</th>
-        <th scope="col">Salary</th>
-        <th scope="col">Experience</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for job in jobs %}
-      <tr>
-        <td>{{ job.job_name }}</td>
-        <td>{{ job.position }}</td>
-        <td>{{ job.get_job_type_display }}</td>
-        <td>{{ job.location }}</td>
-        <td>{{ job.salary }}</td>
-        <td>{{ job.experience }}</td>
-        <td>{{ job.description }}</td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="7">No jobs found.</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+<style>
+.page-content {
+  position: relative;
+  padding-bottom: 406px;
+  /* Adjust this value to match the height of your form */
+}
+.background-class {
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: blur(5px);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('/static/img/back.jpg');
+  background-size: cover;
+  z-index: -1;
+}
+.container {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.form-control-lg {
+  height: 50px;
+}
+.btn-primary {
+  height: 50px;
+  font-size: 18px;
+  padding: 0 20px;
+}
+.table {
+  margin-top: 30px;
+}
+</style>
+<div class="page-content">
+  <div class="background-class"></div>
+  <div class="container">
+      <form class="form-inline" method="get" action="{% url 'job_search' %}">
+                        <div class="form-group mb-2 mr-2">
+                            <label for="search" class="sr-only">Search</label>
+                            <input type="text" class="form-control form-control-lg" id="search" name="search" placeholder="Search">
+                        </div>
+                        <div class="form-group mb-2 mr-2">
+                            <label for="type" class="sr-only">Job Type</label>
+                            <select class="form-control form-control-lg" id="type" name="type">
+                                <option value="1">Full time</option>
+                                <option value="2">Part time</option>
+                                <option value="3">Internship</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg mb-2">Job Search</button>
+                    </form>
+    <h1>Job Search Results</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Job Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Job Type</th>
+          <th scope="col">Location</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Experience</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        <tr>
+          <td>{{ job.job_name }}</td>
+          <td>{{ job.position }}</td>
+          <td>{{ job.get_job_type_display }}</td>
+          <td>{{ job.location }}</td>
+          <td>{{ job.salary }}</td>
+          <td>{{ job.experience }}</td>
+          <td>{{ job.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7">No jobs found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+      </div>
+    </div>
 {% endblock %}

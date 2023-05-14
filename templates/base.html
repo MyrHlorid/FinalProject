@@ -17,25 +17,6 @@
       display: flex;
       align-items: center;
     }
-       body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        margin: 0;
-    }
-
-    .content {
-        flex: 1;
-    }
-
-    .footer {
-        flex-shrink: 0;
-        background-color: #333;
-        height: 65px;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-    }
 
     .logo {
       font-size: 24px;
@@ -57,9 +38,15 @@
       color: #fff;
       text-decoration: none;
     }
+    .footer {
+        background-color: #333;
+        height: 65px;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
 
-
-
+      {% block cssadd %}
     .content {
         min-height: calc(100vh - 125px); /* Subtract header and footer heights */
     }
@@ -85,6 +72,7 @@
          background-size: cover;
         z-index: -1;
     }
+      {% endblock %}
     .authenticated, .login{
         display: flex;
         margin: 0;
@@ -108,16 +96,14 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/job_list">Job list</a></li>
-      {% if user.company_name %}
         <li><a href="/job_add">Job_add</a></li>
-      {% endif %}
         <li><a href="/profile">Profile</a></li>
       </ul>
 
       {% if user.is_authenticated %}
         <div class="authenticated">
             <a class="logout" href="/logout">Logout</a>
-            <p class="welcome">Welcome, {{user.email}}</p>
+            <p class="welcome">Welcome, {{user.username}}</p>
         </div>
 
       {% else %}
@@ -130,20 +116,20 @@
                 <div class="background_class"></div>
                 <h1 class="words text-center">Find your dream job</h1>
                 <div class="d-flex justify-content-center mt-5">
-                    <form class="form-inline" action="{% url 'search_job' %}">
+                    <form class="form-inline" method="get" action="{% url 'job_search' %}">
                         <div class="form-group mb-2 mr-2">
                             <label for="search" class="sr-only">Search</label>
-                            <input type="text" class="form-control form-control-lg" id="search" placeholder="Search" value="{{ search_text }}">
+                            <input type="text" class="form-control form-control-lg" id="search" name="search" placeholder="Search">
                         </div>
                         <div class="form-group mb-2 mr-2">
                             <label for="type" class="sr-only">Job Type</label>
-                            <select name="category" class="form-control form-control-lg" id="type">
-                                <option value="category1">Full time</option>
-                                <option value="category2">Part time</option>
-                                <option value="category3">Internship</option>
+                            <select class="form-control form-control-lg" id="type" name="type">
+                                <option value="1">Full time</option>
+                                <option value="2">Part time</option>
+                                <option value="3">Internship</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg mb-2"><a href="/search">Submit</a></button>
+                        <button type="submit" class="btn btn-primary btn-lg mb-2">Job Search</button>
                     </form>
                 </div>
                  <div class="creators row mt-5">
