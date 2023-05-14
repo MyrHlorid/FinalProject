@@ -25,6 +25,17 @@ class UserJob(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        # create a candidate record for this user and job
+        candidate, created = Candidates.objects.get_or_create(
+            name=self.user.username,
+            email=self.user.email,
+        )
+
+        candidate.save()
+
 class Candidates (models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)

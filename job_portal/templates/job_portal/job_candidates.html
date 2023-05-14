@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Candidate list for {{ job.position }}</h1>
+    {% if usernames %}
+        <ul>
+        {% for username in usernames %}
+            <li>{{ username }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No candidates yet</p>
+    {% endif %}
+{% endblock %}

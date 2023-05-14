@@ -13,17 +13,10 @@ from django.contrib.auth.models import User
 from .forms import ApplyJobForm
 from .models import Job, Candidates, Profile, UserJob
 from django.http import HttpResponse
-
+from django.db import models
 
 def index(request):
     return render(request, "base.html")
-
-from django.shortcuts import render
-from .models import Job
-
-from django.shortcuts import render
-from django.db.models import Q
-from .models import Job
 
 def search_job(request):
     search_text = request.GET.get("search", "")
@@ -153,6 +146,19 @@ def create_job(request):
 def job_list(request):
     jobs = Job.objects.all()
     return render(request, 'job_portal/job_list.html', {'jobs': jobs})
+
+def job_candidates(request, job_id):
+    # Get the Job object
+    job = Job.objects.get(id=job_id)
+
+    # Get the UserJob objects for the job
+    user_jobs = UserJob.objects.filter(job=job)
+
+    # Get the usernames of the users who took the job
+    usernames = [user_job.user.username for user_job in user_jobs]
+
+    context = {'job': job, 'usernames': usernames}
+    return render(request, 'job_portal/job_candidates.html', context)
 
 @login_required(login_url='login')
 def profile_view(request):
