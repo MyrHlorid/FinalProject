@@ -8,7 +8,7 @@ from .models import Profile
 from .models import Job
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
+from django.db.models import Q
 from django.contrib.auth.models import User
 from .forms import ApplyJobForm
 from .models import Job, Candidates, Profile, UserJob
@@ -18,6 +18,12 @@ from django.http import HttpResponse
 def index(request):
     return render(request, "base.html")
 
+
+def job_search(request):
+    search_query = request.GET.get('search')
+    job_type = request.GET.get('type')
+    jobs = Job.objects.filter(job_name__icontains=search_query, job_type=job_type)
+    return render(request, 'job_portal/job_search.html', {'jobs': jobs})
 
 def register_request(request):
     if request.method == "POST":
