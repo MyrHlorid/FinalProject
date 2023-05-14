@@ -18,6 +18,9 @@ class SearchJobForm(forms.Form):
                                      ("category3", "Category 3"),
                                  ))
 
+
+
+
 class ApplyJobForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()
