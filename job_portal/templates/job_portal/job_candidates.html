@@ -4,7 +4,7 @@
 {% block content %}
 <style>
     .container {
-        padding-bottom: 456px;
+        padding-bottom: 490px;
     }
     .background_class{
         background-color:rgba(0,0,0,.3);
@@ -27,11 +27,11 @@
         <h1 class="text-white mb-4">Candidate list for {{ job.position }}</h1>
         {% if usernames %}
             <div class="card bg-dark text-white" style="max-width: 600px; margin: 0 auto;">
-                <ul class="list-group list-group-flush">
                 {% for username in usernames %}
-                    <li class="list-group-item bg-dark hok">{{ username }}</li>
+                    <li class="list-group-item bg-dark hok">
+                        <p>{{ username }}</p>
+                    </li>
                 {% endfor %}
-                </ul>
             </div>
         {% else %}
             <p class="mt-4">No candidates yet</p>

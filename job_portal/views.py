@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm, JobForm, SearchJobForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages

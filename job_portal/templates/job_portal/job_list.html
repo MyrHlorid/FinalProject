@@ -38,7 +38,7 @@
                         <p class="card-text"><strong>Experience:</strong>{{job.experience}}</p>
                         <p class="card-text"><strong>Description:</strong>{{job.description}}</p>
                         {% if user.is_authenticated %}
-                        <a href="{% url 'add_job_to_user' job_id=job.id %}" class="btn btn-dark">Apply now</a>
+                        <a href="{% url 'add_job_to_user' job_id=job.id %}" class="btn btn-primary">Apply now</a>
                         <a href="{% url 'job_candidates' job_id=job.id %}" class="btn btn-primary">Candidate list</a>
                         {% endif %}
                     </div>
