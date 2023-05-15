@@ -88,6 +88,12 @@ def logout_request(request):
 def add_job_to_user(request, job_id):
     user = request.user
     job = Job.objects.get(id=job_id)
+
+    # Check if the user has already added the job
+    if UserJob.objects.filter(user=user, job=job).exists():
+        message = '<div style="text-align: center; margin-top: 50px; font-size: 24px;">You have already added this job</div>'
+        return HttpResponse(message)
+
     user_job = UserJob(user=user, job=job)
     user_job.save()
     return redirect('job_list')
@@ -102,35 +108,6 @@ def clear_user_jobs(request):
         user_jobs = UserJob.objects.filter(user=request.user)
         user_jobs.delete()
     return redirect('profile')
-@login_required
-def apply_job(request, job_id):
-    job = Job.objects.get(id=job_id)
-    if request.method == 'POST':
-        form = ApplyJobForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = request.user
-            if not user.is_authenticated:
-                return redirect('login')
-            applicant_name = form.cleaned_data.get('name')
-            applicant_email = form.cleaned_data.get('email')
-            phone = form.cleaned_data.get('phone')
-            cv = form.cleaned_data.get('cv')
-            cover_letter = form.cleaned_data.get('cover_letter')
-            job_apply = JobApply.objects.create(
-                job=job,
-                user=user,
-                applicant_name=applicant_name,
-                applicant_email=applicant_email,
-                phone=phone,
-                cv=cv,
-                cover_letter=cover_letter
-            )
-            job_apply.save()
-            return redirect('profile')
-    else:
-        form = ApplyJobForm()
-    context = {'job': job, 'form': form}
-    return render(request, 'job/apply_job.html', context)
 
 def create_job(request):
     if request.method == 'POST':
